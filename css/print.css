@@ -1,0 +1,171 @@
+/* ATS-safe CV content styling — applies on screen (inside the preview pane) and on print.
+   Single-column reading order throughout so an ATS parser's linear text extraction
+   matches the visual order. Light styling (accent color, no icons/images) stays within
+   that constraint. */
+
+.cv-preview {
+  font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  color: #111827;
+  line-height: 1.4;
+  font-size: 10.5pt;
+}
+
+.cv-contact {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.cv-photo img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 40%;
+}
+
+.cv-name {
+  font-size: 20pt;
+  margin: 0 0 0.15rem;
+  font-weight: 700;
+}
+
+.cv-title {
+  font-size: 14pt;
+  margin: 0 0 0.2rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+.cv-subtitle {
+  font-size: 10.5pt;
+  margin: 0 0 0.4rem;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.cv-contact-line,
+.cv-links {
+  margin: 0.1rem 0;
+  font-size: 9.5pt;
+  color: #374151;
+}
+
+.cv-links a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.cv-section {
+  margin-bottom: 0.9rem;
+}
+
+.cv-section-title {
+  font-size: 11.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #2563eb;
+  border-bottom: 1.5pt solid #2563eb;
+  padding-bottom: 0.15rem;
+  margin: 0 0 0.5rem;
+}
+
+.cv-summary-text {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.cv-entry {
+  margin-bottom: 0.6rem;
+  break-inside: avoid-page;
+}
+
+.cv-entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  font-weight: 600;
+}
+
+.cv-entry-primary {
+  font-size: 10.5pt;
+}
+
+.cv-entry-dates {
+  font-size: 9.5pt;
+  color: #6b7280;
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+.cv-entry-location {
+  margin: 0.1rem 0;
+  font-size: 9.5pt;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.cv-entry-description {
+  margin: 0.2rem 0;
+}
+
+.cv-bullets {
+  margin: 0.25rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.cv-bullets li {
+  margin-bottom: 0.12rem;
+}
+
+.cv-entry-link {
+  font-size: 9.5pt;
+  color: #2563eb;
+}
+
+.cv-skill-row,
+.cv-languages-line {
+  margin: 0.15rem 0;
+}
+
+@media print {
+  .ui-chrome {
+    display: none;
+  }
+
+  html,
+  body {
+    background: white;
+  }
+
+  .cv-preview {
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    height: auto;
+    overflow: visible;
+  }
+
+  .workspace {
+    display: block;
+    height: auto;
+    overflow: visible;
+  }
+
+  .form-panel {
+    display: none;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin: 16mm 18mm;
+}
