@@ -203,6 +203,7 @@ function renderEntryForm(def, entry, onRemove) {
   const wrap = el("div", "entry-form");
   def.fields.forEach((f) => {
     if (f.kind === "stringList") {
+      if (!Array.isArray(entry[f.key])) entry[f.key] = [];
       wrap.appendChild(stringListField(f.label, entry[f.key], notify));
     } else {
       wrap.appendChild(
