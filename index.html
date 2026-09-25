@@ -1,40 +1,44 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CV Composer</title>
-  <link rel="stylesheet" href="css/app.css" />
-  <link rel="stylesheet" href="css/print.css" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>CV Composer</title>
+	<link rel="stylesheet" href="css/app.css" />
+	<link rel="stylesheet" href="css/print.css" />
 </head>
+
 <body>
-  <div class="ui-chrome">
-    <header class="toolbar">
-      <h1 class="app-title">CV Composer</h1>
-      <div class="toolbar-actions">
-        <button id="btn-new">New</button>
-        <button id="btn-open">Open</button>
-        <button id="btn-save">Save</button>
-        <button id="btn-save-as">Save As</button>
-        <button id="btn-pick-folder" title="Pick the folder your CV files live in">CV Folder</button>
-        <select id="cv-switcher" title="Switch between CVs in the picked folder" hidden></select>
-        <button id="btn-toggle-lang" title="Toggle preview section-title language">FR</button>
-        <button id="btn-print" class="btn-primary">Print / PDF</button>
-      </div>
-      <span id="status" class="status"></span>
-    </header>
-    <p id="fallback-notice" class="fallback-notice" hidden>
-      Your browser doesn't support opening/saving files directly (this needs Chrome or Edge).
-      Use "Download JSON" to export instead, and drag a file onto "Open" won't work either —
-      re-open this page in Chrome/Edge for full save-in-place support.
-    </p>
-  </div>
+	<div class="ui-chrome">
+		<header class="toolbar">
+			<h1 class="app-title">CV Composer</h1>
+			<div class="toolbar-actions">
+				<button id="btn-new">New</button>
+				<button id="btn-open">Open</button>
+				<button id="btn-save">Save</button>
+				<button id="btn-save-as">Save As</button>
+				<button id="btn-pick-folder" title="Pick the folder your CV files live in">CV Folder</button>
+				<select id="cv-switcher" title="Switch between CVs in the picked folder" hidden></select>
+				<button id="btn-download-sample">Download Sample</button>
+				<button id="btn-toggle-lang" title="Toggle preview section-title language">FR</button>
+				<button id="btn-print" class="btn-primary">Print / PDF</button>
+			</div>
+			<span id="status" class="status"></span>
+		</header>
+		<p id="fallback-notice" class="fallback-notice" hidden>
+			Your browser doesn't support opening/saving files directly (this needs Chrome or Edge).
+			Use "Download JSON" to export instead, and drag a file onto "Open" won't work either —
+			re-open this page in Chrome/Edge for full save-in-place support.
+		</p>
+	</div>
 
-  <div class="workspace">
-    <aside id="form-panel" class="form-panel ui-chrome"></aside>
-    <main id="cv-preview" class="cv-preview"></main>
-  </div>
+	<div class="workspace">
+		<aside id="form-panel" class="form-panel ui-chrome"></aside>
+		<main id="cv-preview" class="cv-preview"></main>
+	</div>
 
-  <script type="module" src="js/app.js"></script>
+	<script type="module" src="js/app.js"></script>
 </body>
+
 </html>

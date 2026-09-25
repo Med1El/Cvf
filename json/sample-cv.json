@@ -1,0 +1,149 @@
+{
+  "meta": {
+    "language": "en",
+    "sectionOrder": [
+      "summary",
+      "experience",
+      "skills",
+      "education",
+      "languages",
+      "projects"
+    ],
+    "hiddenSections": []
+  },
+  "contact": {
+    "name": "Sample CV",
+    "title": "Sample Professional Title",
+    "subtitle": "Sample subtitle for a tailored profile",
+    "email": "sample@example.com",
+    "phone": "+1 555 010 2026",
+    "location": "Sample City | Sample Country",
+    "age": "",
+    "links": [
+      {
+        "label": "Website",
+        "url": "https://example.com"
+      },
+      {
+        "label": "Profile",
+        "url": "https://example.com/profile"
+      }
+    ],
+    "photo": ""
+  },
+  "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae justo sed ipsum facilisis commodo. Praesent malesuada, mauris at posuere feugiat, neque lorem consequat libero, vitae tincidunt nunc erat non ipsum. Curabitur blandit, lectus sed dignissim tincidunt, arcu nulla consequat erat, vitae posuere lorem nunc sed justo. Donec suscipit, nisl a feugiat vulputate, purus sem consequat neque, vitae luctus urna lorem at sapien.",
+  "experience": [
+    {
+      "role": "Sample Role",
+      "company": "Sample Organization",
+      "location": "Sample City",
+      "start": "2022",
+      "end": "Present",
+      "bullets": [
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec ullamcorper nulla non metus auctor fringilla."
+      ]
+    },
+    {
+      "role": "Sample Associate",
+      "company": "Sample Group",
+      "location": "Sample Region",
+      "start": "2018",
+      "end": "2022",
+      "bullets": [
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+        "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.",
+        "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat."
+      ]
+    },
+    {
+      "role": "Sample Assistant",
+      "company": "Sample Institution",
+      "location": "Sample Town",
+      "start": "2015",
+      "end": "2018",
+      "bullets": [
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.",
+        "Maecenas sed diam eget risus varius blandit sit amet non magna. Cras mattis consectetur purus sit amet fermentum.",
+        "Aenean lacinia bibendum nulla sed consectetur. Integer posuere erat a ante venenatis dapibus posuere velit aliquet."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "category": "Sample Category One",
+      "items": [
+        "Lorem ipsum",
+        "Dolor sit amet",
+        "Consectetur adipiscing",
+        "Integer posuere",
+        "Praesent commodo"
+      ]
+    },
+    {
+      "category": "Sample Category Two",
+      "items": [
+        "Sed do eiusmod",
+        "Tempor incididunt",
+        "Labore et dolore",
+        "Magna aliqua",
+        "Quis nostrud"
+      ]
+    },
+    {
+      "category": "Sample Category Three",
+      "items": [
+        "Ullamco laboris",
+        "Ex ea commodo",
+        "Duis aute irure",
+        "Reprehenderit",
+        "Voluptate velit"
+      ]
+    },
+    {
+      "category": "Sample Category Four",
+      "items": [
+        "Fugiat nulla",
+        "Excepteur sint",
+        "Occaecat cupidatat",
+        "Non proident",
+        "Mollit anim"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Sample Degree",
+      "institution": "Sample University",
+      "location": "Sample City",
+      "start": "2012",
+      "end": "2016"
+    },
+    {
+      "degree": "Sample Certificate",
+      "institution": "Sample Institute",
+      "location": "Sample Region",
+      "start": "2010",
+      "end": "2012"
+    }
+  ],
+  "languages": [
+    {
+      "name": "Sample Language One",
+      "level": "Fluent"
+    },
+    {
+      "name": "Sample Language Two",
+      "level": "Professional"
+    },
+    {
+      "name": "Sample Language Three",
+      "level": "Conversational"
+    }
+  ],
+  "projects": []
+}
