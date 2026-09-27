@@ -119,15 +119,14 @@ function renderSkillsSection(def, value, label) {
 function renderLanguagesSection(def, value, label) {
 	const section = el("section", "cv-section");
 	section.appendChild(el("h2", "cv-section-title", label));
-	const p = el(
-		"p",
-		"cv-languages-line",
-		value
-			.filter((row) => row.name)
-			.map((row) => (row.level ? `${row.name} (${row.level})` : row.name))
-			.join(" • ")
-	);
-	section.appendChild(p);
+	value
+		.filter((row) => row.name)
+		.forEach((row) => {
+			const line = el("p", "cv-language-line");
+			line.appendChild(el("span", "cv-language-marker", "-"));
+			line.appendChild(document.createTextNode(` ${row.level ? `${row.name} (${row.level})` : row.name}`));
+			section.appendChild(line);
+		});
 	return section;
 }
 
