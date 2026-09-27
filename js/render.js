@@ -16,8 +16,8 @@ function renderContact(cv, language) {
 
 	if (contact.name) info.appendChild(el("h1", "cv-name", contact.name));
 	if (contact.title) info.appendChild(el("p", "cv-title", contact.title));
-	if (contact.age) info.appendChild(el("p", "cv-contact-line", `${contact.age} ${language === "fr" ? "ans" : "years old"}`));
 	if (contact.subtitle) info.appendChild(el("p", "cv-subtitle", contact.subtitle));
+	if (contact.age) info.appendChild(el("p", "cv-contact-line", `${contact.age} ${language === "fr" ? "ans" : "years old"}`));
 
 	[contact.email, contact.phone, contact.location]
 		.filter(Boolean)

@@ -84,8 +84,8 @@ export const CONTACT_FIELDS = [
 	{ key: "name", label: "Name" },
 	{ key: "title", label: "Title" },
 	{ key: "subtitle", label: "Subtitle" },
+	{ key: "age", label: "Age" },
 	{ key: "email", label: "Email" },
 	{ key: "phone", label: "Phone" },
 	{ key: "location", label: "Location" },
-	{ key: "age", label: "Age" },
 ];
