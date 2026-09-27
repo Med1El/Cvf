@@ -218,6 +218,26 @@ body {
 	padding: 0.2rem 0;
 }
 
+.entry-actions {
+	display: flex;
+	align-items: center;
+	gap: 0.35rem;
+}
+
+.btn-move-entry {
+	border: 1px solid #d1d5db;
+	background: white;
+	border-radius: 4px;
+	width: 1.6rem;
+	height: 1.5rem;
+	cursor: pointer;
+}
+
+.btn-move-entry:disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+}
+
 .cv-contact {
 	display: flex;
 	justify-content: space-between;
