@@ -1,8 +1,10 @@
-import { subscribe, getCv, setCv, isDirty, getPreviewLanguage, togglePreviewLanguage } from "./state.js";
+import { subscribe, getCv, setCv, isDirty, getPreviewLanguage, togglePreviewLanguage, notify } from "./state.js";
 import { renderCv } from "./render.js";
 import { initForm, renderForm } from "./form.js";
 import { openCv, saveCv, saveCvAs, newCv, hasFileSystemAccess } from "./fileAccess.js";
 import { pickCvFolder, reuseCvFolder, listCvFiles, loadCvFile } from "./cvFolder.js";
+import { exportCompressedPdf } from "./pdfExport.js";
+import { compressPhoto } from "./photo.js";
 
 const preview = document.getElementById("cv-preview");
 const statusEl = document.getElementById("status");
@@ -11,6 +13,7 @@ const toggleLangBtn = document.getElementById("btn-toggle-lang");
 const pickFolderBtn = document.getElementById("btn-pick-folder");
 const cvSwitcher = document.getElementById("cv-switcher");
 const downloadSampleBtn = document.getElementById("btn-download-sample");
+const compressPdfBtn = document.getElementById("btn-compress-pdf");
 
 let cvFolder = null;
 let currentCvName = null;
@@ -55,6 +58,7 @@ async function switchToCv(name) {
 	await loadCvFile(cvFolder, name);
 	currentCvName = name;
 	cvLoaded = true;
+	await healOversizedPhoto();
 	renderForm();
 	setStatus(`Opened ${name}`);
 }
@@ -64,6 +68,7 @@ async function loadSampleCv() {
 	if (!response.ok) throw new Error(`Could not load sample CV (${response.status})`);
 	setCv(await response.json());
 	cvLoaded = true;
+	await healOversizedPhoto();
 	renderForm();
 	setStatus("Sample CV loaded");
 }
@@ -99,6 +104,7 @@ document.getElementById("btn-open").addEventListener("click", async () => {
 	if (name) {
 		currentCvName = name;
 		cvLoaded = true;
+		await healOversizedPhoto();
 		renderForm();
 		setStatus(`Opened ${name}`);
 	}
@@ -157,6 +163,25 @@ window.addEventListener("beforeunload", (event) => {
 	event.returnValue = "";
 });
 
+// Legacy CVs may carry a full-resolution photo (several MB of base64) from before
+// upload-time compression existed. Slim it in memory so every export — and the next
+// Save — drops back to tens of KB. Marks the CV dirty so the slimming can be kept.
+async function healOversizedPhoto() {
+	const contact = getCv().contact;
+	if (!contact?.photo || contact.photo.length < 300_000) return;
+	try {
+		contact.photo = await compressPhoto(contact.photo, 512, 0.8);
+		notify(); // re-render preview + mark dirty so Save persists the slimming
+		setStatus("Photo optimized — Save to keep the smaller file");
+	} catch {
+		// Undecodable photo: leave it untouched.
+	}
+}
+
+function formatKb(bytes) {
+	return `${Math.max(1, Math.round(bytes / 1024))} KB`;
+}
+
 // Turn "Mohamed ELALAMI" into "cv-mohamed-elalami-2026-07-10", which the browser's
 // "Save as PDF" dialog proposes as the filename (it derives it from document.title).
 function pdfFilename() {
@@ -175,6 +200,18 @@ document.getElementById("btn-print").addEventListener("click", () => {
 	document.title = pdfFilename();
 	window.print();
 	document.title = originalTitle;
+});
+
+compressPdfBtn.addEventListener("click", async () => {
+	compressPdfBtn.disabled = true;
+	setStatus("Creating compressed PDF...");
+	try {
+		const bytes = await exportCompressedPdf(getCv(), `${pdfFilename()}.pdf`, getPreviewLanguage());
+		setStatus(`Compressed PDF saved (${formatKb(bytes)})`);
+	} catch (err) {
+		if (err.name !== "AbortError") showError(err.message);
+	}
+	compressPdfBtn.disabled = false;
 });
 
 if (!hasFileSystemAccess()) {

@@ -1,6 +1,7 @@
 import { getCv, notify } from "./state.js";
 import { SECTIONS, CONTACT_FIELDS } from "./schema.js";
 import { moveSection, moveEntry, toggleSectionHidden, isSectionHidden } from "./sections.js";
+import { compressPhoto } from "./photo.js";
 
 function el(tag, className) {
 	const node = document.createElement(tag);
@@ -82,8 +83,14 @@ function renderContactForm(cv) {
 		if (!file) return;
 
 		const reader = new FileReader();
-		reader.onload = () => {
-			contact.photo = reader.result;
+		reader.onload = async () => {
+			try {
+				// Downscale on upload: a raw phone photo would otherwise bloat
+				// the saved JSON to several MB and any exported PDF with it.
+				contact.photo = await compressPhoto(reader.result, 512, 0.8);
+			} catch {
+				contact.photo = reader.result;
+			}
 			notify();
 			renderForm();
 		};
