@@ -1,6 +1,7 @@
 import { getCv, getPreviewLanguage } from "./state.js";
 import { SECTIONS } from "./schema.js";
 import { isSectionHidden, isSectionEmpty } from "./sections.js";
+import { getStyle } from "./styleState.js";
 
 function el(tag, className, text) {
 	const node = document.createElement(tag);
@@ -78,26 +79,61 @@ function renderStringList(items) {
 	return ul;
 }
 
-function renderEntry(def, entry) {
-	const wrap = el("div", "cv-entry");
+// sectionKey is passed so we can apply section-specific classes and behaviour
+// (e.g. cv-entry-edu class for education, inline display mode for education).
+function renderEntry(def, entry, sectionKey = "") {
+	const isEdu = sectionKey === "education";
+	const isExp = sectionKey === "experience";
+	const style = getStyle();
 
-	// First line: role/degree/category + company/institution, right-aligned dates.
 	const primary = entry[def.fields[0].key];
 	const secondary = def.fields[1] ? entry[def.fields[1].key] : null;
 	const start = entry.start;
 	const end = entry.end;
 
+	// Education inline mode: three flex items — name stretches, dates and location fixed.
+	if (isEdu && style.eduInline) {
+		const wrap = el("div", "cv-entry cv-entry-edu cv-entry-edu-inline");
+
+		// Left: bold degree + normal school
+		const nameWrap = document.createElement("span");
+		nameWrap.className = "cv-entry-edu-inline-name";
+		if (primary) {
+			const bold = el("strong", "cv-entry-primary cv-edu-degree", primary);
+			nameWrap.appendChild(bold);
+		}
+		if (secondary) {
+			if (primary) nameWrap.appendChild(document.createTextNode(" \u2014 "));
+			const school = el("span", "cv-entry-primary cv-edu-school", secondary);
+			nameWrap.appendChild(school);
+		}
+
+		const datePart = [start, end].filter(Boolean).join("\u2013");
+		const datesSpan = el("span", "cv-entry-dates cv-entry-edu-inline-dates", datePart);
+		const locSpan   = el("span", "cv-entry-location cv-entry-edu-inline-loc", entry.location || "");
+
+		wrap.appendChild(nameWrap);
+		wrap.appendChild(datesSpan);
+		wrap.appendChild(locSpan);
+		return wrap;
+	}
+
+	const wrap = el("div", isEdu ? "cv-entry cv-entry-edu" : isExp ? "cv-entry cv-entry-exp" : "cv-entry");
+
 	if (primary || secondary) {
 		const head = el("div", "cv-entry-head");
-		const left = el("span", "cv-entry-primary", [primary, secondary].filter(Boolean).join(" — "));
+		const left = el("span", "cv-entry-primary", [primary, secondary].filter(Boolean).join(" \u2014 "));
 		head.appendChild(left);
+		if (style.expLocationInline && !isEdu && entry.location) {
+			head.appendChild(el("span", "cv-entry-location", entry.location));
+		}
 		if (start || end) {
-			head.appendChild(el("span", "cv-entry-dates", [start, end].filter(Boolean).join(" – ")));
+			head.appendChild(el("span", "cv-entry-dates", [start, end].filter(Boolean).join(" \u2013 ")));
 		}
 		wrap.appendChild(head);
 	}
 
-	if (entry.location) wrap.appendChild(el("p", "cv-entry-location", entry.location));
+	if (entry.location && !(style.expLocationInline && !isEdu)) wrap.appendChild(el("p", "cv-entry-location", entry.location));
 	if (entry.description) wrap.appendChild(el("p", "cv-entry-description", entry.description));
 
 	const listField = def.fields.find((f) => f.kind === "stringList");
@@ -135,14 +171,25 @@ function renderSkillsSection(def, value, label) {
 function renderLanguagesSection(def, value, label) {
 	const section = el("section", "cv-section");
 	section.appendChild(el("h2", "cv-section-title", label));
-	value
-		.filter((row) => row.name)
-		.forEach((row) => {
+
+	const rows = value.filter((row) => row.name);
+
+	if (getStyle().langInline) {
+		// All languages on one line, separated by " · "
+		const line = el("p", "cv-language-line");
+		line.textContent = rows
+			.map((row) => (row.level ? `${row.name} (${row.level})` : row.name))
+			.join(" · ");
+		section.appendChild(line);
+	} else {
+		rows.forEach((row) => {
 			const line = el("p", "cv-language-line");
 			line.appendChild(el("span", "cv-language-marker", "-"));
 			line.appendChild(document.createTextNode(` ${row.level ? `${row.name} (${row.level})` : row.name}`));
 			section.appendChild(line);
 		});
+	}
+
 	return section;
 }
 
@@ -157,7 +204,8 @@ function renderListSection(key, def, value, label) {
 
 	const section = el("section", "cv-section");
 	section.appendChild(el("h2", "cv-section-title", label));
-	nonEmpty.forEach((entry) => section.appendChild(renderEntry(def, entry)));
+	// Pass sectionKey so renderEntry can apply section-specific behaviour.
+	nonEmpty.forEach((entry) => section.appendChild(renderEntry(def, entry, key)));
 	return section;
 }
 

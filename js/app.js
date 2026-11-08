@@ -40,7 +40,10 @@ subscribe(() => renderCv(preview));
 subscribe(syncToggleLangBtn);
 
 // Apply style overrides immediately and on every style change.
+// Also re-render the CV on style changes — some style flags (e.g. eduInline)
+// affect DOM structure, not just CSS, so a re-render is required.
 subscribeStyle(applyStyle);
+subscribeStyle(() => renderCv(preview));
 applyStyle(getStyle());
 
 initForm(document.getElementById("form-panel"));

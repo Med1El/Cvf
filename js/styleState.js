@@ -1,17 +1,47 @@
 // Default style values — chosen to match the current print.css exactly so loading
 // a CV with no saved config produces zero visual change.
 export const DEFAULT_STYLE = {
-	fontSizePt: 10.5,       // base text size (pt)
-	nameSizePt: 20,         // cv-name
-	contactTitleSizePt: 14, // cv-title (job title under name)
-	contactSubtitleSizePt: 10.5, // cv-subtitle
-	titleSizePt: 11.5,      // cv-section-title
-	sectionGapRem: 0.9,     // margin-bottom between sections
-	entryGapRem: 0.6,       // margin-bottom between entries
-	contactSpacing: 1,      // scale factor for spacing between contact sub-elements (1 = current)
-	padVMm: 16,             // page top/bottom padding (mm)
-	padHMm: 18,             // page left/right padding (mm)
-	blankLineHeightPt: 8,   // height of empty-line spacers in summary
+	// ── Basic ────────────────────────────────────────────────────────────────
+	fontSizePt: 10.5,
+	nameSizePt: 20,
+	contactTitleSizePt: 14,
+	contactSubtitleSizePt: 10.5,
+	titleSizePt: 11.5,
+	sectionGapRem: 0.9,
+	entryGapRem: 0.6,
+	padVMm: 16,
+	padHMm: 18,
+	// ── Advanced mode flag ───────────────────────────────────────────────────
+	advancedMode: false,
+	// ── Advanced: contact spacing ────────────────────────────────────────────
+	contactNameGapRem: 0.15,
+	contactTitleGapRem: 0.2,
+	contactSubtitleGapRem: 0.4,
+	contactLineGapRem: 0.1,
+	// ── Advanced: summary ────────────────────────────────────────────────────
+	summaryFontSizePt: 10.5,
+	summaryLineHeight: 1.4,
+	blankLineHeightPt: 8,
+	// ── Advanced: experience ─────────────────────────────────────────────────
+	expRoleSizePt: 10.5,
+	expLocationInline: false,
+	expEntryGapRem: 0.6,
+	expDatesSizePt: 9.5,
+	expLocationSizePt: 9.5,
+	expDescSizePt: 10.5,
+	expBulletsSizePt: 10.5,
+	expBulletGapRem: 0.12,
+	// ── Advanced: skills ─────────────────────────────────────────────────────
+	skillsFontSizePt: 10.5,
+	skillsRowGapRem: 0.15,
+	// ── Advanced: education ──────────────────────────────────────────────────
+	eduFontSizePt: 10.5,
+	eduEntryGapRem: 0.6,
+	eduInline: false,
+	// ── Advanced: languages ──────────────────────────────────────────────────
+	langFontSizePt: 10.5,
+	langLineGapRem: 0.15,
+	langInline: false,
 };
 
 let current = { ...DEFAULT_STYLE };

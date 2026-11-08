@@ -125,6 +125,40 @@
 	color: #2563eb;
 }
 
+/* Education inline mode: degree (bold) — school stretches, then fixed year + city columns */
+.cv-entry-edu-inline {
+	display: flex;
+	align-items: baseline;
+	gap: 0.75rem;
+	margin-bottom: 0;
+}
+
+.cv-entry-edu-inline-name {
+	flex: 1 1 auto;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.cv-edu-degree {
+	font-weight: 700;
+}
+
+.cv-edu-school {
+	font-weight: 400;
+}
+
+.cv-entry-edu-inline-dates {
+	flex: 0 0 auto;
+	white-space: nowrap;
+}
+
+.cv-entry-edu-inline-loc {
+	flex: 0 0 auto;
+	white-space: nowrap;
+}
+
 .cv-skill-row,
 .cv-language-line {
 	margin: 0.15rem 0;

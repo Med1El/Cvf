@@ -473,3 +473,112 @@ body {
 .style-drawer-btn-primary:hover {
 	background: #1d4ed8;
 }
+
+/* ── Advanced mode toggle ────────────────────────────────────────────────── */
+
+.style-advanced-toggle-row {
+	padding: 0.55rem 0;
+	border-top: 1px solid #374151;
+	border-bottom: 1px solid #374151;
+	margin: 0.6rem 0;
+}
+
+.style-advanced-toggle-label {
+	display: flex;
+	align-items: center;
+	gap: 0.45rem;
+	color: #e5e7eb;
+	font-size: 0.82rem;
+	cursor: pointer;
+	user-select: none;
+}
+
+.style-advanced-checkbox {
+	accent-color: #3b82f6;
+	width: 14px;
+	height: 14px;
+	cursor: pointer;
+	flex-shrink: 0;
+}
+
+/* ── Collapsible groups (details / summary) ──────────────────────────────── */
+
+.style-advanced-section {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+}
+
+.style-group {
+	border: 1px solid #374151;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.style-group-summary {
+	list-style: none;
+	padding: 0.4rem 0.65rem;
+	background: #2d3748;
+	color: #f3f4f6;
+	font-size: 0.78rem;
+	font-weight: 600;
+	cursor: pointer;
+	user-select: none;
+	letter-spacing: 0.03em;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.style-group-summary::-webkit-details-marker {
+	display: none;
+}
+
+.style-group-summary::after {
+	content: "▶";
+	font-size: 0.6rem;
+	opacity: 0.6;
+	transition: transform 0.15s;
+}
+
+.style-group[open] > .style-group-summary::after {
+	content: "▼";
+}
+
+.style-group[open] > .style-group-summary {
+	border-bottom: 1px solid #374151;
+}
+
+.style-group-body {
+	padding: 0.55rem 0.65rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+/* ── Boolean toggle row (e.g. Formation inline) ──────────────────────────── */
+
+.style-toggle-row {
+	display: flex;
+	align-items: flex-start;
+}
+
+.style-toggle-label {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.4rem;
+	color: #d1d5db;
+	font-size: 0.78rem;
+	cursor: pointer;
+	user-select: none;
+	line-height: 1.4;
+}
+
+.style-toggle-input {
+	accent-color: #3b82f6;
+	width: 14px;
+	height: 14px;
+	cursor: pointer;
+	flex-shrink: 0;
+	margin-top: 0.1rem;
+}
