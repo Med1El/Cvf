@@ -52,7 +52,23 @@ function renderContact(cv, language) {
 function renderTextSection(def, value, label) {
 	const section = el("section", "cv-section");
 	section.appendChild(el("h2", "cv-section-title", label));
-	section.appendChild(el("p", "cv-summary-text", value));
+
+	// Split on double newlines so we can inject a height-controlled spacer between
+	// paragraphs. Single newlines within a paragraph are preserved via pre-wrap.
+	const p = el("p", "cv-summary-text");
+	p.style.margin = "0";
+	p.style.whiteSpace = "pre-wrap";
+
+	const chunks = (value || "").split(/\n\n/);
+	chunks.forEach((chunk, i) => {
+		if (i > 0) {
+			// Blank-line spacer — height is driven by .cv-blank-line in the style override.
+			p.appendChild(el("span", "cv-blank-line"));
+		}
+		p.appendChild(document.createTextNode(chunk));
+	});
+
+	section.appendChild(p);
 	return section;
 }
 

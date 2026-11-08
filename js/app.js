@@ -5,6 +5,10 @@ import { openCv, saveCv, saveCvAs, newCv, hasFileSystemAccess } from "./fileAcce
 import { pickCvFolder, reuseCvFolder, listCvFiles, loadCvFile } from "./cvFolder.js";
 import { exportCompressedPdf } from "./pdfExport.js";
 import { compressPhoto } from "./photo.js";
+import { getStyle, setStyle, subscribeStyle, DEFAULT_STYLE } from "./styleState.js";
+import { applyStyle } from "./styleApply.js";
+import { loadStyleConfig } from "./styleConfig.js";
+import { initStyleDrawer } from "./styleDrawer.js";
 
 const preview = document.getElementById("cv-preview");
 const statusEl = document.getElementById("status");
@@ -35,9 +39,21 @@ function syncToggleLangBtn() {
 subscribe(() => renderCv(preview));
 subscribe(syncToggleLangBtn);
 
+// Apply style overrides immediately and on every style change.
+subscribeStyle(applyStyle);
+applyStyle(getStyle());
+
 initForm(document.getElementById("form-panel"));
 renderCv(preview);
 syncToggleLangBtn();
+
+// Style drawer — lazy getters so the drawer always sees the current cvFolder / currentCvName.
+initStyleDrawer(
+	document.querySelector(".toolbar-actions"),
+	() => cvFolder,
+	() => currentCvName,
+	setStatus
+);
 
 // Lists the CVs in the picked folder and loads the first one, since the dropdown
 // always shows a selection and that selection should match what's actually loaded.
@@ -59,6 +75,9 @@ async function switchToCv(name) {
 	currentCvName = name;
 	cvLoaded = true;
 	await healOversizedPhoto();
+	// Load style config for this CV; fall back to defaults if none saved yet.
+	const savedStyle = await loadStyleConfig(cvFolder, name);
+	setStyle(savedStyle ?? { ...DEFAULT_STYLE });
 	renderForm();
 	setStatus(`Opened ${name}`);
 }
