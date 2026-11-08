@@ -139,7 +139,19 @@ function renderEntry(def, entry, sectionKey = "") {
 	const listField = def.fields.find((f) => f.kind === "stringList");
 	if (listField) {
 		const items = (entry[listField.key] || []).filter(Boolean);
-		if (items.length) wrap.appendChild(renderStringList(items));
+		const techStack = entry.techStack?.trim() || "";
+		if (items.length || techStack) {
+			const ul = renderStringList(items);
+			if (techStack) {
+				const li = document.createElement("li");
+				li.className = "cv-tech-stack";
+				// Four-corner star marker + bold text
+				const bold = el("strong", null, techStack);
+				li.appendChild(bold);
+				ul.appendChild(li);
+			}
+			wrap.appendChild(ul);
+		}
 	}
 
 	if (entry.link) {

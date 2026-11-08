@@ -31,6 +31,7 @@ export const DEFAULT_STYLE = {
 	expDescSizePt: 10.5,
 	expBulletsSizePt: 10.5,
 	expBulletGapRem: 0.12,
+	expTechStackSizePt: 9.5,
 	// ── Advanced: skills ─────────────────────────────────────────────────────
 	skillsFontSizePt: 10.5,
 	skillsRowGapRem: 0.15,

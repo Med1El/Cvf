@@ -212,6 +212,14 @@ function renderEntryForm(key, index, total, def, entry, onRemove) {
 		if (f.kind === "stringList") {
 			if (!Array.isArray(entry[f.key])) entry[f.key] = [];
 			wrap.appendChild(stringListField(f.label, entry[f.key], notify));
+		} else if (f.kind === "techStack") {
+			if (entry[f.key] === undefined) entry[f.key] = "";
+			wrap.appendChild(
+				labeledInput(f.label, entry[f.key], (v) => {
+					entry[f.key] = v;
+					notify();
+				})
+			);
 		} else {
 			wrap.appendChild(
 				labeledInput(f.label, entry[f.key], (v) => {

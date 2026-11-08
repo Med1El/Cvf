@@ -47,6 +47,7 @@ const ADVANCED_GROUPS = [
 			{ label: "Taille description",       key: "expDescSizePt",    min: 7, max: 14,  step: 0.5,  unit: "pt"  },
 			{ label: "Taille bullets",           key: "expBulletsSizePt", min: 7, max: 14,  step: 0.5,  unit: "pt"  },
 			{ label: "Espace entre bullets",     key: "expBulletGapRem",  min: 0, max: 0.5, step: 0.01, unit: "rem" },
+			{ label: "Taille tech stack",        key: "expTechStackSizePt", min: 7, max: 14, step: 0.5, unit: "pt" },
 			{ label: "Espace entre expériences", key: "expEntryGapRem",   min: 0, max: 2,   step: 0.05, unit: "rem" },
 		],
 	},

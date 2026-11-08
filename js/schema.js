@@ -27,7 +27,7 @@ export const SECTIONS = {
 	experience: {
 		label: { en: "Experience", fr: "Expérience" },
 		kind: "list",
-		emptyEntry: () => ({ role: "", company: "", location: "", start: "", end: "", bullets: [] }),
+		emptyEntry: () => ({ role: "", company: "", location: "", start: "", end: "", bullets: [], techStack: "" }),
 		fields: [
 			{ key: "role", label: "Role" },
 			{ key: "company", label: "Company" },
@@ -35,6 +35,7 @@ export const SECTIONS = {
 			{ key: "start", label: "Start" },
 			{ key: "end", label: "End" },
 			{ key: "bullets", label: "Bullets", kind: "stringList" },
+			{ key: "techStack", label: "Tech stack", kind: "techStack" },
 		],
 	},
 	education: {

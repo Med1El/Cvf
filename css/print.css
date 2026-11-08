@@ -125,6 +125,10 @@
 	color: #2563eb;
 }
 
+.cv-tech-stack-marker {
+	font-style: normal;
+}
+
 /* Education inline mode: degree (bold) — school stretches, then fixed year + city columns */
 .cv-entry-edu-inline {
 	display: flex;

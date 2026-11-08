@@ -170,6 +170,11 @@ ${s.advancedMode ? `
 	margin-bottom: ${s.expBulletGapRem}rem;
 }
 
+.cv-tech-stack {
+	font-size: ${s.expTechStackSizePt}pt;
+	margin-bottom: ${s.expBulletGapRem}rem;
+}
+
 /* Skills */
 .cv-skill-row {
 	font-size: ${s.skillsFontSizePt}pt;
